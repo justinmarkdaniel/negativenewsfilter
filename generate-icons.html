@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Extension Icons</title>
+</head>
+<body>
+    <h2>Generating icons...</h2>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <canvas id="canvas48" width="48" height="48"></canvas>
+    <canvas id="canvas128" width="128" height="128"></canvas>
+
+    <script>
+        function generateIcon(size) {
+            const canvas = document.getElementById('canvas' + size);
+            const ctx = canvas.getContext('2d');
+
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Add sparkle emoji
+            ctx.font = Math.floor(size * 0.6) + 'px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('✨', size/2, size/2);
+
+            // Download
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'icon' + size + '.png';
+                a.click();
+            });
+        }
+
+        generateIcon(16);
+        setTimeout(() => generateIcon(48), 100);
+        setTimeout(() => generateIcon(128), 200);
+
+        setTimeout(() => {
+            document.body.innerHTML = '<h2>✅ Icons generated! Check your downloads folder.</h2><p>Move icon16.png, icon48.png, and icon128.png to the extension folder.</p>';
+        }, 500);
+    </script>
+</body>
+</html>

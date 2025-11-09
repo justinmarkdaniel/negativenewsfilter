@@ -1,0 +1,18 @@
+# API Keys and secrets
+*.key
+.env
+
+# macOS
+.DS_Store
+._*
+
+# Node modules (if any)
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
