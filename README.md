@@ -1,141 +1,123 @@
-# 🌟 Positivity Filter - Chrome Extension
+# Internet Negativity Filter
 
-A Chrome extension that filters negative news and replaces it with positive alternatives using AI.
+A Chrome extension that transforms negative news headlines into positive, constructive alternatives using AI-powered content filtering.
 
-## ⚠️ IMPORTANT: API Key Security
+## Features
 
-**NEVER share your OpenAI API key publicly!** The key included in your initial message has been exposed and should be revoked immediately at https://platform.openai.com/api-keys
+- **Automatic Filtering**: Runs automatically on 100+ major news sites worldwide
+- **Instant Headline Hiding**: Headlines appear white until processed, preventing negative content exposure
+- **Hard-coded Fallback Replacements**: 40+ instant text replacements (Putin → Russian President, shutdown → government holiday, etc.)
+- **AI-Powered Transformation**: Uses OpenAI GPT-4 to intelligently reframe negative content
+- **Smart Categorization**: Filters violence, conflict, military, political negativity, disasters, and emotional triggers
+- **3x Viewport Coverage**: Processes above-the-fold content plus 2 viewports down
+- **DOM Observer**: Automatically reapplies filters when content changes
 
-## 🚀 Installation
+## Transformation Examples
 
-### Step 1: Generate Icons
+### Military Conflicts → Diplomatic Progress
+- "Russian forces are poised to finally capture Pokrovsk"  
+  → "Russian delegates are making progress with Pokrovsk"
 
-1. Open `generate-icons.html` in your browser
-2. It will automatically download 3 icon files (icon16.png, icon48.png, icon128.png)
-3. Move these PNG files to the extension folder (same folder as manifest.json)
+### Violence/Tragedy → Remembrance
+- "Car plows into Florida bar patio in 'senseless' tragedy that leaves 4 dead"  
+  → "Remembering 4 friends who lived and laughed together at a Florida bar"
 
-### Step 2: Load Extension in Chrome
+### Political Conflict → Collaboration
+- "Senate Republicans slam 'insane' Democrat proposal as federal shutdown continues"  
+  → "Senate Republicans collaborate with Democrat proposals as federal holiday continues"
 
-1. Open Chrome and go to `chrome://extensions/`
-2. Enable **Developer mode** (toggle in top right)
-3. Click **Load unpacked**
-4. Select the folder containing this extension
-5. The extension should now appear in your extensions list
+### Terror/Threats → Safety Improvements
+- "FBI thwarts alleged ISIS terror cell's 'pumpkin' plot targeting bars"  
+  → "FBI completes operation and improves safety for bars"
 
-### Step 3: Configure API Key
+## Installation
 
-1. Click the extension icon in your Chrome toolbar
-2. Enter your OpenAI API key (starts with `sk-`)
-3. Click **Save Key**
+1. Clone this repository
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable "Developer mode" (top right)
+4. Click "Load unpacked"
+5. Select the extension directory
+6. Click the extension icon and enter your OpenAI API key
 
-## 🎯 How to Use
+## Supported News Sites
 
-1. Visit any news website (CNN, NYTimes, BBC, etc.)
-2. Click the extension icon
-3. Click **✨ Filter This Page**
-4. Watch as negative headlines are replaced with positive ones!
+- **US**: CNN, Fox News, NYTimes, Washington Post, NBC, ABC, CBS, USA Today, Reuters, Bloomberg, WSJ
+- **UK**: BBC, The Guardian, Telegraph, Daily Mail, The Sun
+- **International**: Al Jazeera, France24, DW, Reuters, AFP
+- **Tech/Science**: Wired, Ars Technica, The Verge, Scientific American
+- **And 80+ more major news outlets**
 
-## 🔧 How It Works
+## Configuration
 
-1. **Scans** headlines above the fold (visible without scrolling)
-2. **Identifies** negative content (politics, violence, disasters)
-3. **Sends** to OpenAI GPT-4o-mini for analysis
-4. **Replaces** negative stories with positive alternatives
-5. All replacements are factually accurate and topic-related
+1. Click the extension icon in your browser
+2. Enter your OpenAI API key (get one at https://platform.openai.com/api-keys)
+3. Click "Save API Key"
+4. The filter will automatically activate on supported news sites
 
-## 📁 Files
+## How It Works
 
-- `manifest.json` - Extension configuration
-- `content.js` - Extracts and replaces headlines on web pages
-- `content.css` - Loading skeleton styles
-- `background.js` - Handles OpenAI API calls
-- `popup.html` - Extension popup interface
-- `popup.js` - Popup functionality
-- `popup.css` - Popup styling
-- `generate-icons.html` - Icon generator (open in browser)
+1. **Immediate Hiding**: Headlines turn white as soon as the page loads
+2. **Fallback Replacements**: 40+ hard-coded replacements run instantly (Putin, Trump, forces, killed, shutdown, etc.)
+3. **AI Processing**: Sends visible content to OpenAI GPT-4o-mini for intelligent transformation
+4. **Text Replacement**: Replaces negative headlines with positive alternatives
+5. **Smooth Reveal**: Headlines fade from white to their normal color after filtering
 
-## 🛠️ Technical Details
+## Filter Categories
 
-- **Model**: GPT-4o-mini (fast and cost-effective)
-- **API**: OpenAI Chat Completions
-- **Manifest**: V3 (latest Chrome extension format)
-- **Permissions**: activeTab, storage, scripting
+- Politics & Government
+- Violence & Crime
+- Military & War
+- Disasters & Accidents
+- Negative emotions & events
+- Economic hardship
+- Social conflicts
+- Discrimination & hate
+- Health crises
+- Legal troubles
+- Death & Loss
 
-## ⚙️ Customization
+## Privacy
 
-### Modify Negative Keywords
+- Only processes text from news sites
+- API calls are made directly to OpenAI (no third-party servers)
+- Your API key is stored locally in Chrome storage
+- No user data is collected or transmitted
 
-Edit `background.js` and update the system prompt to change what's considered "negative":
+## Technology Stack
 
-```javascript
-function getSystemPrompt() {
-    return `You are an Internet Negativity Filter...
-    - Politics (Trump, Biden, elections, political conflicts)
-    - Violence (murder, bomb, war, killed, shooting, attack)
-    // Add or remove keywords here
-    ...`
-}
+- **Manifest V3** Chrome Extension
+- **OpenAI GPT-4o-mini** for intelligent text transformation
+- **Vanilla JavaScript** (no dependencies)
+- **Content Scripts** with DOM manipulation
+- **Service Worker** background script
+
+## Development
+
+```bash
+# Load extension in Chrome
+1. Navigate to chrome://extensions/
+2. Enable Developer mode
+3. Click "Load unpacked"
+4. Select the extension directory
+
+# View logs
+- Content script logs: Right-click page → Inspect → Console
+- Background script logs: chrome://extensions/ → Extension details → Inspect views: service worker
 ```
 
-### Change AI Behavior
+## License
 
-Adjust the `temperature` parameter in `background.js` to make responses more creative (higher) or consistent (lower):
+MIT License - Feel free to use and modify
 
-```javascript
-temperature: 0.7,  // 0.0 = consistent, 1.0 = creative
-```
+## Contributing
 
-## 🐛 Troubleshooting
+Contributions welcome! Please feel free to submit a Pull Request.
 
-### Extension won't load
-- Make sure all files are in the same folder
-- Check that icons are present (run generate-icons.html)
-- Verify manifest.json has no syntax errors
+## Credits
 
-### Filter button doesn't work
-- Ensure API key is saved
-- Check browser console for errors (F12 → Console)
-- Verify you have credits in your OpenAI account
-
-### No headlines replaced
-- Page might use non-standard HTML structure
-- Headlines might not be detected as "negative"
-- Check console for API errors
-
-### Icons missing
-- Open `generate-icons.html` in browser
-- Download the 3 PNG files
-- Move them to extension folder
-- Reload extension in chrome://extensions
-
-## 💰 Cost Estimate
-
-Using GPT-4o-mini is very affordable:
-- ~$0.00015 per page filter
-- 1000 page filters ≈ $0.15
-
-## 🔒 Privacy
-
-- API key stored locally in Chrome storage
-- No data sent anywhere except OpenAI
-- No tracking or analytics
-- All processing happens client-side
-
-## 📝 Notes
-
-- Works best on major news sites with standard HTML
-- Only filters content above the fold (visible area)
-- Replacements are AI-generated but factually grounded
-- May not catch all negative content
-
-## 🆘 Support
-
-If you encounter issues:
-1. Check the browser console (F12)
-2. Verify API key is valid
-3. Test on a major news site first
-4. Ensure you have OpenAI credits
+Built with [Claude Code](https://claude.com/claude-code)  
+Powered by OpenAI GPT-4
 
 ---
 
-Made with 💚 for your mental wellbeing
+**Note**: This extension requires an OpenAI API key. API usage costs apply based on OpenAI's pricing.
