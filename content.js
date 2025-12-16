@@ -66,6 +66,31 @@ function isNewsSite() {
     return false;
 }
 
+// Check if current page is a homepage/top-level page (not a subpage/article)
+function isHomepage() {
+    const pathname = window.location.pathname;
+
+    // Homepage patterns: "/", "/index.html", "/index.php", "/home", etc.
+    // Also allow section landing pages like "/news", "/politics", "/world"
+    const homepagePatterns = [
+        /^\/$/,                          // Root path "/"
+        /^\/index\.(html?|php|asp)$/i,   // Index files
+        /^\/home\/?$/i,                  // /home
+        /^\/[a-z-]+\/?$/i,               // Single segment paths like /news, /politics, /world
+    ];
+
+    // Check if pathname matches any homepage pattern
+    for (const pattern of homepagePatterns) {
+        if (pattern.test(pathname)) {
+            console.log(`[INF PLUGIN] ✅ Homepage/top-level page detected: ${pathname}`);
+            return true;
+        }
+    }
+
+    console.log(`[INF PLUGIN] ⏭️ Subpage detected (${pathname}), skipping filter`);
+    return false;
+}
+
 // IMMEDIATELY hide headlines on news sites by making them white
 function hideHeadlinesImmediately() {
     console.log('[INF PLUGIN] 🎨 Hiding headlines immediately (white text)...');
@@ -660,8 +685,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 console.log('[INF PLUGIN] ✅ Content script loaded and ready');
 
-// AUTO-RUN: Filter negativity automatically on page load (ONLY on news sites)
-if (isNewsSite()) {
+// AUTO-RUN: Filter negativity automatically on page load (ONLY on news site homepages)
+if (isNewsSite() && isHomepage()) {
     // IMMEDIATELY hide headlines on news sites (make them white)
     hideHeadlinesImmediately();
 
@@ -678,5 +703,5 @@ if (isNewsSite()) {
         filterNegativity();
     }
 } else {
-    console.log('[INF PLUGIN] ⏭️ Skipping auto-run (not a news site)');
+    console.log('[INF PLUGIN] ⏭️ Skipping auto-run (not a news site homepage)');
 }

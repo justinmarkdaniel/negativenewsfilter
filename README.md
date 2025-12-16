@@ -32,12 +32,39 @@ A Chrome extension that transforms negative news headlines into positive, constr
 
 ## Installation
 
-1. Clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" (top right)
-4. Click "Load unpacked"
-5. Select the extension directory
-6. Click the extension icon and enter your OpenAI API key
+### Step 1: Download the Extension
+
+**Option A: Clone with Git**
+```bash
+git clone https://github.com/justinmarkdaniel/internetnegativityfilter.git
+```
+
+**Option B: Download ZIP**
+1. Click the green "Code" button on GitHub
+2. Select "Download ZIP"
+3. Extract the ZIP file to a folder on your computer
+
+### Step 2: Load in Chrome
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **Developer mode** using the toggle in the top right corner
+3. Click **Load unpacked** button (top left)
+4. Navigate to and select the folder containing the extension files (the folder with `manifest.json`)
+5. The extension should now appear in your extensions list
+
+### Step 3: Get an OpenAI API Key
+
+1. Go to [OpenAI's API Keys page](https://platform.openai.com/api-keys)
+2. Sign in or create an account
+3. Click **Create new secret key**
+4. Copy the key (you won't be able to see it again)
+
+### Step 4: Configure the Extension
+
+1. Click the extension icon in Chrome's toolbar (puzzle piece icon → pin the extension for easy access)
+2. Paste your OpenAI API key into the input field
+3. Click **Save API Key**
+4. You're all set! The filter will now run automatically on news site homepages
 
 ## Supported News Sites
 
@@ -107,11 +134,21 @@ A Chrome extension that transforms negative news headlines into positive, constr
 
 ## License
 
-MIT License - Feel free to use and modify
+This project is licensed under a **Personal Use License**. You are free to:
+- Use the extension for personal, non-commercial purposes
+- Modify the code for your own personal use
+
+You may NOT:
+- Redistribute the extension or modified versions
+- Sell or commercially exploit the extension
+- Publish the extension on the Chrome Web Store or any other extension marketplace
+- Use the extension or its code for commercial purposes
+
+See the [LICENSE](LICENSE) file for full details.
 
 ## Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
+This is a personal project and is not accepting external contributions at this time.
 
 ## Credits
 
