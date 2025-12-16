@@ -36,7 +36,7 @@ A Chrome extension that transforms negative news headlines into positive, constr
 
 **Option A: Clone with Git**
 ```bash
-git clone https://github.com/justinmarkdaniel/internetnegativityfilter.git
+git clone https://github.com/justinmarkdaniel/negativenewsfilter.git
 ```
 
 **Option B: Download ZIP**
@@ -152,7 +152,7 @@ This is a personal project and is not accepting external contributions at this t
 
 ## Credits
 
-Built with [Claude Code](https://claude.com/claude-code)  
+Built by Justin Daniel
 Powered by OpenAI GPT-4
 
 ---
